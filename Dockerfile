@@ -36,7 +36,11 @@ RUN mkdir cmake && cd cmake && wget \
 #     https://cmake.org/files/v4.0/cmake-4.0.5-linux-x86_64.tar.gz && \
 #     tar -xzf cmake-4.0.5-linux-x86_64.tar.gz
 
+# ZSH and OH_MY_ZSH
+SHELL ["/usr/bin/zsh"]
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 WORKDIR /code
 
-# CMD ["bin/zsh"]
-CMD ["bin/bash"] 
+CMD ["bin/zsh"]
+# CMD ["bin/bash"] 
