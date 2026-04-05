@@ -40,6 +40,10 @@ RUN mkdir cmake && cd cmake && wget \
 SHELL ["/usr/bin/zsh"]
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# And add fast-syntax-highlighting to your plugin list.
+RUN git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+
 WORKDIR /code
 
 CMD ["bin/zsh"]
