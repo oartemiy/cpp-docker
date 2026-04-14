@@ -23,8 +23,7 @@ RUN apt-get update && \
     zip \
     unzip \
     tar \
-    gzip \
-    tar
+    gzip
 
 # New cmake for CLion (aarch64)
 RUN mkdir cmake && cd cmake && wget \
@@ -37,14 +36,15 @@ RUN mkdir cmake && cd cmake && wget \
 #     tar -xzf cmake-4.0.5-linux-x86_64.tar.gz
 
 # ZSH and OH_MY_ZSH
-SHELL ["/usr/bin/zsh"]
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # And add fast-syntax-highlighting to your plugin list.
 RUN git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
   ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 
+SHELL ["/usr/bin/zsh"]
+
 WORKDIR /code
 
-CMD ["bin/zsh"]
+# CMD ["bin/zsh"]
 # CMD ["bin/bash"] 
