@@ -1,0 +1,73 @@
+FROM ubuntu:latest
+
+# Устанавливаем все необходимые пакеты для курса ОС
+RUN apt-get update && \
+    apt-get install -y \
+    sudo \
+    # Компиляторы и системы сборки
+    gcc \
+    g++ \
+    make \
+    cmake \
+    clang \
+    clangd \
+    ninja-build \
+    valgrind \
+    # Базовые утилиты
+    git \
+    wget \
+    curl \
+    vim \
+    nano \
+    zip \
+    unzip \
+    tar \
+    gzip \
+    # Инструменты отладки и трассировки системных вызовов
+    gdb \
+    strace \
+    ltrace \
+    man-db \
+    manpages-dev \
+    manpages-posix-dev \
+    build-essential \
+    linux-headers-generic \
+    # Мониторинг процессов и файлов
+    procps \
+    psmisc \
+    lsof \
+    htop \
+    tree \
+    # Сетевые утилиты (для работы с сокетами)
+    iproute2 \
+    net-tools \
+    iputils-ping \
+    tcpdump \
+    # Дополнительные полезные мелочи
+    file \
+    less \
+    # Инструменты для System V IPC (ipcs, ipcrm и др.)
+    util-linux \
+    # Сетевые утилиты для экспериментов с сокетами
+    netcat-openbsd \
+    telnet \
+    socat \
+    # Дополнительные утилиты для сборки
+    pkg-config
+
+# Создаём пользователя oartemiy с паролем 1234
+RUN useradd -m -s /bin/bash oartemiy && \
+    echo "oartemiy:1234" | chpasswd && \
+    usermod -aG sudo oartemiy
+
+# Переключаемся на пользователя oartemiy
+USER oartemiy
+WORKDIR /home/oartemiy/code
+
+# Переменные окружения для компиляторов
+ENV CC=gcc
+ENV CXX=g++
+
+# Запускаем bash
+CMD ["/bin/bash"]
+
