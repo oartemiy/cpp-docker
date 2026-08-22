@@ -35,17 +35,6 @@ RUN mkdir cmake && cd cmake && wget \
 #     https://cmake.org/files/v4.0/cmake-4.0.5-linux-x86_64.tar.gz && \
 #     tar -xzf cmake-4.0.5-linux-x86_64.tar.gz
 
-# ZSH and OH_MY_ZSH
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
-# And add fast-syntax-highlighting to your plugin list.
-RUN git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
-  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-
-RUN sed -i 's/plugins=(git)/plugins=(git fast-syntax-highlighting)/' ~/.zshrc
-
-SHELL ["/usr/bin/zsh"]
-
 WORKDIR /code
 
 # CMD ["bin/zsh"]
