@@ -1,10 +1,9 @@
 FROM ubuntu:latest
 
-# Устанавливаем все необходимые пакеты для курса ОС
 RUN apt-get update && \
     apt-get install -y \
     sudo \
-    # Компиляторы и системы сборки
+    # Compilers
     gcc \
     g++ \
     make \
@@ -13,7 +12,7 @@ RUN apt-get update && \
     clangd \
     ninja-build \
     valgrind \
-    # Базовые утилиты
+    # Utils
     git \
     wget \
     curl \
@@ -23,7 +22,7 @@ RUN apt-get update && \
     unzip \
     tar \
     gzip \
-    # Инструменты отладки и трассировки системных вызовов
+    # Debug
     gdb \
     strace \
     ltrace \
@@ -32,42 +31,42 @@ RUN apt-get update && \
     manpages-posix-dev \
     build-essential \
     linux-headers-generic \
-    # Мониторинг процессов и файлов
+    # Files
     procps \
     psmisc \
     lsof \
     htop \
     tree \
-    # Сетевые утилиты (для работы с сокетами)
+    # Net Utils
     iproute2 \
     net-tools \
     iputils-ping \
     tcpdump \
-    # Дополнительные полезные мелочи
+    # etc
     file \
     less \
-    # Инструменты для System V IPC (ipcs, ipcrm и др.)
+    # System V IPC
     util-linux \
-    # Сетевые утилиты для экспериментов с сокетами
+    # Sockets
     netcat-openbsd \
     telnet \
     socat \
-    # Дополнительные утилиты для сборки
+    # Pkg
     pkg-config
 
-# Создаём пользователя oartemiy с паролем 1234
+# user: oartemiy password: 1234
 RUN useradd -m -s /bin/bash oartemiy && \
     echo "oartemiy:1234" | chpasswd && \
     usermod -aG sudo oartemiy
 
-# Переключаемся на пользователя oartemiy
+# Switch user to: oartemiy
 USER oartemiy
 WORKDIR /home/oartemiy/code
 
-# Переменные окружения для компиляторов
+# ENV
 ENV CC=gcc
 ENV CXX=g++
 
-# Запускаем bash
+# RUN bash
 CMD ["/bin/bash"]
 
