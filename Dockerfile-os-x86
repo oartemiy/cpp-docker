@@ -1,0 +1,79 @@
+FROM ubuntu:latest
+
+RUN apt-get update && \
+    apt-get install -y \
+    sudo \
+    # Compilers
+    gcc \
+    g++ \
+    make \
+    cmake \
+    clang \
+    clangd \
+    ninja-build \
+    valgrind \
+    # Utils
+    git \
+    wget \
+    curl \
+    vim \
+    nano \
+    zip \
+    unzip \
+    tar \
+    gzip \
+    # Debug
+    gdb \
+    strace \
+    ltrace \
+    man-db \
+    manpages-dev \
+    manpages-posix-dev \
+    build-essential \
+    linux-headers-generic \
+    # Files
+    procps \
+    psmisc \
+    lsof \
+    htop \
+    tree \
+    # Net Utils
+    iproute2 \
+    net-tools \
+    iputils-ping \
+    tcpdump \
+    # etc
+    file \
+    less \
+    # System V IPC
+    util-linux \
+    # Sockets
+    netcat-openbsd \
+    telnet \
+    socat \
+    # Pkg
+    pkg-config \
+    # x86 tools
+    nasm \
+    yasm \
+    binutils \
+    elfutils \
+    gcc-multilib \
+    g++-multilib \
+    libc6-dev-i386
+
+# user: oartemiy password: 1234
+RUN useradd -m -s /bin/bash oartemiy && \
+    echo "oartemiy:1234" | chpasswd && \
+    usermod -aG sudo oartemiy
+
+# Switch user to: oartemiy
+USER oartemiy
+WORKDIR /home/oartemiy/code
+
+# ENV
+ENV CC=gcc
+ENV CXX=g++
+
+# RUN bash
+CMD ["/bin/bash"]
