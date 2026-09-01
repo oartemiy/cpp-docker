@@ -66,6 +66,8 @@ WORKDIR /home/oartemiy/code
 # ENV
 ENV CC=gcc
 ENV CXX=g++
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # RUN bash
 CMD ["/bin/bash"]
